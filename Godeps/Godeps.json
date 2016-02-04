@@ -1,0 +1,17 @@
+{
+	"ImportPath": "github.com/progrium/simplex-gateway",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/progrium/simplex/golang",
+			"Rev": "56aa12bbbdef2542469c8c1ac76b796ac2d35226"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "7654728e381988afd88e58cabfd6363a5ea91810"
+		}
+	]
+}

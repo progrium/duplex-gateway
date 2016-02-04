@@ -6,8 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/progrium/simplex/golang"
-	"golang.org/x/net/websocket"
+	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
 func _connect(rpc *simplex.RPC, path string, backend bool) (*simplex.Peer, error) {
