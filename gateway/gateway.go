@@ -181,7 +181,7 @@ func HandleBackend(w http.ResponseWriter, r *http.Request) {
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Scheme != "https" && os.Getenv("NOTLS") == "" {
+	if r.Header.Get("x-forwarded-proto") != "https" && os.Getenv("NOTLS") == "" {
 		http.Error(w, "TLS required", http.StatusForbidden)
 		return
 	}
