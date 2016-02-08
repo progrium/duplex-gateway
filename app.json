@@ -1,0 +1,16 @@
+{
+  "name": "Duplex Hub",
+  "description": "Hub service for publishing WebSocket+JSON Duplex services",
+  "repository": "https://github.com/progrium/duplex-hub",
+  "keywords": ["duplex", "rpc", "api"],
+  "env": {
+    "TOKEN": {
+      "description": "The secret token for publishing services",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "Enables logging messages",
+      "value": "1"
+    }
+  },
+}

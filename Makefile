@@ -1,3 +1,4 @@
+BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 .PHONY: test
 
 run:
@@ -10,4 +11,4 @@ savedeps:
 	godep save -r ./...
 
 deploy:
-	git push -f heroku $(git rev-parse --abbrev-ref HEAD):master
+	git push -f heroku $(BRANCH):master
