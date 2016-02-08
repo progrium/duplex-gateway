@@ -1,8 +1,11 @@
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 .PHONY: test
 
-run:
-	PORT=8080 TOKEN=dev DEBUG=1 NOTLS=1 go run hub/hub.go
+build: hub/hub
+	cd hub && go build
+
+run: build
+	PORT=8080 TOKEN=dev DEBUG=1 NOTLS=1 hub/hub
 
 test:
 	go test -v ./...

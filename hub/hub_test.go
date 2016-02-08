@@ -10,7 +10,7 @@ import (
 	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
-func _connect(rpc *duplex.RPC, path string, backend bool) (*duplex.Peer, error) {
+func connect(rpc *duplex.RPC, path string, backend bool) (*duplex.Peer, error) {
 	var baseUrl, token, secret, url string
 	if os.Getenv("HUB_URL") != "" {
 		baseUrl = os.Getenv("HUB_URL")
@@ -42,11 +42,11 @@ func _connect(rpc *duplex.RPC, path string, backend bool) (*duplex.Peer, error) 
 }
 
 func ConnectBackend(rpc *duplex.RPC, path string) (*duplex.Peer, error) {
-	return _connect(rpc, path, true)
+	return connect(rpc, path, true)
 }
 
 func ConnectClient(rpc *duplex.RPC, path string) (*duplex.Peer, error) {
-	return _connect(rpc, path, false)
+	return connect(rpc, path, false)
 }
 
 func TestClientToBackendRoundtrip(t *testing.T) {

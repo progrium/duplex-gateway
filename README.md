@@ -22,9 +22,24 @@ Now upgrade to WebSocket. Over WebSocket, perform the Duplex handshake. This con
 
 Given a known endpoint that services are exposed on, you can connect to that endpoint like a regular Duplex peer over WebSocket transport. You just have to connect with HTTPS passing a `secret` query parameter. That's it!
 
-## Using Services via HTTP (future)
+## Using Services via HTTP
 
 You can also perform HTTP POST requests against subpaths of the endpoint. The subpath will be used as the method to make a request against. Your body will be used as the request payload. The response will be the reply payload as JSON. These requests also require the `secret` query parameter.
+
+If a method does not return, the request will block indefinitely. Use query param `async=true` when using methods intended for async calls. 
+
+## Status Codes
+
+Since using WebSocket in the browser gives much less insight into what went wrong with HTTP connections, here are how various HTTP error codes are used in Duplex Hub:
+
+ * `400` - missing `secret` when publishing backend, or invalid JSON payload in HTTP API requests
+ * `401` - invalid `token` when publishing backend, or invalid `secret` otherwise
+ * `403` - forbidden, TLS is required
+ * `404` - endpoint not found
+ * `405` - HTTP method is not allowed
+ * `501` - Method/service is not implemented (HTTP API)
+ * `503` - Backend service became unavailable (HTTP API)
+
 
 ## TODO
 
