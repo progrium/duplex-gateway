@@ -6,11 +6,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/duplex/golang"
 	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
-func _connect(rpc *simplex.RPC, path string, backend bool) (*simplex.Peer, error) {
+func _connect(rpc *duplex.RPC, path string, backend bool) (*duplex.Peer, error) {
 	var baseUrl, token, secret, url string
 	if os.Getenv("HUB_URL") != "" {
 		baseUrl = os.Getenv("HUB_URL")
@@ -41,17 +41,17 @@ func _connect(rpc *simplex.RPC, path string, backend bool) (*simplex.Peer, error
 	return rpc.Handshake(ws)
 }
 
-func ConnectBackend(rpc *simplex.RPC, path string) (*simplex.Peer, error) {
+func ConnectBackend(rpc *duplex.RPC, path string) (*duplex.Peer, error) {
 	return _connect(rpc, path, true)
 }
 
-func ConnectClient(rpc *simplex.RPC, path string) (*simplex.Peer, error) {
+func ConnectClient(rpc *duplex.RPC, path string) (*duplex.Peer, error) {
 	return _connect(rpc, path, false)
 }
 
 func TestClientToBackendRoundtrip(t *testing.T) {
-	backendRpc := simplex.NewRPC(simplex.NewJSONCodec())
-	backendRpc.Register("echo", func(ch *simplex.Channel) error {
+	backendRpc := duplex.NewRPC(duplex.NewJSONCodec())
+	backendRpc.Register("echo", func(ch *duplex.Channel) error {
 		var obj interface{}
 		if _, err := ch.Recv(&obj); err != nil {
 			return err
@@ -65,7 +65,7 @@ func TestClientToBackendRoundtrip(t *testing.T) {
 	}
 	defer backend.Close()
 
-	clientRpc := simplex.NewRPC(simplex.NewJSONCodec())
+	clientRpc := duplex.NewRPC(duplex.NewJSONCodec())
 	client, err := ConnectClient(clientRpc, "/test")
 	if err != nil {
 		t.Fatal(err)
@@ -82,8 +82,8 @@ func TestClientToBackendRoundtrip(t *testing.T) {
 }
 
 func TestMultipleClients(t *testing.T) {
-	backendRpc := simplex.NewRPC(simplex.NewJSONCodec())
-	backendRpc.Register("echo", func(ch *simplex.Channel) error {
+	backendRpc := duplex.NewRPC(duplex.NewJSONCodec())
+	backendRpc.Register("echo", func(ch *duplex.Channel) error {
 		var obj interface{}
 		if _, err := ch.Recv(&obj); err != nil {
 			return err
@@ -100,7 +100,7 @@ func TestMultipleClients(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(2)
 	go func() {
-		clientRpc1 := simplex.NewRPC(simplex.NewJSONCodec())
+		clientRpc1 := duplex.NewRPC(duplex.NewJSONCodec())
 		client1, err := ConnectClient(clientRpc1, "/test")
 		if err != nil {
 			t.Fatal(err)
@@ -117,7 +117,7 @@ func TestMultipleClients(t *testing.T) {
 		wg.Done()
 	}()
 	go func() {
-		clientRpc2 := simplex.NewRPC(simplex.NewJSONCodec())
+		clientRpc2 := duplex.NewRPC(duplex.NewJSONCodec())
 		client2, err := ConnectClient(clientRpc2, "/test")
 		if err != nil {
 			t.Fatal(err)

@@ -6,8 +6,12 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "github.com/progrium/simplex/golang",
-			"Rev": "48d4b534c2a4d7c470033a3ad7cd85ca71156eff"
+			"ImportPath": "github.com/pborman/uuid",
+			"Rev": "dee7705ef7b324f27ceb85a121c61f2c2e8ce988"
+		},
+		{
+			"ImportPath": "github.com/progrium/duplex/golang",
+			"Rev": "e744627268314c80c1305e719ea2a5f7e8d3a15a"
 		},
 		{
 			"ImportPath": "golang.org/x/net/websocket",

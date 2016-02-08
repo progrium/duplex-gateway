@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/duplex/golang"
 	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
@@ -36,14 +36,14 @@ func RouteKey(id int) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func AcceptSimplexHandshake(ws *websocket.Conn) error {
+func AcceptDuplexHandshake(ws *websocket.Conn) error {
 	buf := make([]byte, 32)
 	_, err := ws.Read(buf) // TODO: timeout
 	if err != nil {
 		return err
 	}
 	// TODO: check handshake
-	_, err = ws.Write([]byte(simplex.HandshakeAccept))
+	_, err = ws.Write([]byte(duplex.HandshakeAccept))
 	if err != nil {
 		return err
 	}
@@ -63,7 +63,7 @@ func HandleClient(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	s := websocket.Server{Handler: func(ws *websocket.Conn) {
-		AcceptSimplexHandshake(ws) // TODO handle error
+		AcceptDuplexHandshake(ws) // TODO handle error
 		endpoint.Lock()
 		endpoint.counter++
 		routeKey := RouteKey(endpoint.counter)
@@ -71,7 +71,7 @@ func HandleClient(w http.ResponseWriter, r *http.Request) {
 		endpoint.Unlock()
 		log.Println("Endpoint", endpoint.path, "client connected", r.RemoteAddr)
 		for {
-			frameBuf := make([]byte, simplex.MaxFrameSize)
+			frameBuf := make([]byte, duplex.MaxFrameSize)
 			n, err := ws.Read(frameBuf)
 			if err != nil {
 				endpoint.Lock()
@@ -79,7 +79,7 @@ func HandleClient(w http.ResponseWriter, r *http.Request) {
 				endpoint.Unlock()
 				break
 			}
-			var msg simplex.Message
+			var msg duplex.Message
 			err = json.Unmarshal(frameBuf[:n], &msg)
 			if err != nil {
 				// TODO: what happens on decode error
@@ -124,7 +124,7 @@ func HandleBackend(w http.ResponseWriter, r *http.Request) {
 			counter: 0,
 			clients: make(map[string]*websocket.Conn),
 		}
-		AcceptSimplexHandshake(ws) // TODO handle error
+		AcceptDuplexHandshake(ws) // TODO handle error
 		endpoint.upstream = ws
 		mu.Lock()
 		old, exists := endpoints[endpoint.path]
@@ -135,14 +135,14 @@ func HandleBackend(w http.ResponseWriter, r *http.Request) {
 		mu.Unlock()
 		log.Println("Endpoint", endpoint.path, "backend online")
 		for {
-			frame := make([]byte, simplex.MaxFrameSize)
+			frame := make([]byte, duplex.MaxFrameSize)
 			n, err := ws.Read(frame)
 			if err != nil {
 				// TODO: what happens on read error
 				log.Println("read err")
 				break
 			}
-			var msg simplex.Message
+			var msg duplex.Message
 			err = json.Unmarshal(frame[:n], &msg)
 			if err != nil {
 				// TODO: what happens on decode error

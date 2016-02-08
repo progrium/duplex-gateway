@@ -8,3 +8,6 @@ test:
 
 savedeps:
 	godep save -r ./...
+
+deploy:
+	git push -f heroku $(git rev-parse --abbrev-ref HEAD):master
