@@ -26,7 +26,7 @@ Given a known endpoint that services are exposed on, you can connect to that end
 
 You can also perform HTTP POST requests against subpaths of the endpoint. The subpath will be used as the method to make a request against. Your body will be used as the request payload. The response will be the reply payload as JSON. These requests also require the `secret` query parameter.
 
-If a method does not return, the request will block indefinitely. Use query param `async=true` when using methods intended for async calls. 
+If a method does not return, the request will block indefinitely. Use query param `async=true` when using methods intended for async calls.
 
 ## Status Codes
 
@@ -43,9 +43,12 @@ Since using WebSocket in the browser gives much less insight into what went wron
 
 ## TODO
 
- * run on heroku
  * more tests
    * can't upstream without token+secret
    * can't client without secret
    * multiple endpoints
    * ERRORS client doesn't exist any more, etc
+
+## License
+
+MIT
