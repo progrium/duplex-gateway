@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/github.com/progrium/simplex/golang"
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/golang.org/x/net/websocket"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
 var (
@@ -196,6 +196,6 @@ func main() {
 	endpoints = make(map[string]*Endpoint)
 	http.HandleFunc("/", Handler)
 	port := ":" + os.Getenv("PORT")
-	log.Println("Simplex gateway started on", port, "...")
+	log.Println("Duplex Hub started on", port, "...")
 	log.Fatal(http.ListenAndServe(port, nil))
 }

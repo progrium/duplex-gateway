@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/progrium/simplex-gateway",
+	"ImportPath": "github.com/progrium/duplex-hub",
 	"GoVersion": "go1.5",
 	"Packages": [
 		"./..."
@@ -7,7 +7,7 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/progrium/simplex/golang",
-			"Rev": "56aa12bbbdef2542469c8c1ac76b796ac2d35226"
+			"Rev": "48d4b534c2a4d7c470033a3ad7cd85ca71156eff"
 		},
 		{
 			"ImportPath": "golang.org/x/net/websocket",

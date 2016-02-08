@@ -6,14 +6,14 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/github.com/progrium/simplex/golang"
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/golang.org/x/net/websocket"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
 func _connect(rpc *simplex.RPC, path string, backend bool) (*simplex.Peer, error) {
 	var baseUrl, token, secret, url string
-	if os.Getenv("GATEWAY_URL") != "" {
-		baseUrl = os.Getenv("GATEWAY_URL")
+	if os.Getenv("HUB_URL") != "" {
+		baseUrl = os.Getenv("HUB_URL")
 	} else {
 		baseUrl = "ws://localhost:8080"
 	}

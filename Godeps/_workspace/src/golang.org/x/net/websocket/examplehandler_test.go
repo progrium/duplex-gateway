@@ -8,7 +8,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/golang.org/x/net/websocket"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
 // Echo the data received on the WebSocket.

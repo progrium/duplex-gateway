@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/github.com/progrium/simplex/golang"
-	"github.com/progrium/simplex-gateway/Godeps/_workspace/src/golang.org/x/net/websocket"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/github.com/progrium/simplex/golang"
+	"github.com/progrium/duplex-hub/Godeps/_workspace/src/golang.org/x/net/websocket"
 )
 
 var rpc = simplex.NewRPC(simplex.NewJSONCodec())
