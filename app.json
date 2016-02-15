@@ -1,7 +1,7 @@
 {
-  "name": "Duplex Hub",
-  "description": "Hub service for publishing WebSocket+JSON Duplex services",
-  "repository": "https://github.com/progrium/duplex-hub",
+  "name": "Duplex Gateway",
+  "description": "Gateway service for publishing WebSocket+JSON Duplex services",
+  "repository": "https://github.com/progrium/duplex-gateway",
   "keywords": ["duplex", "rpc", "api"],
   "env": {
     "TOKEN": {

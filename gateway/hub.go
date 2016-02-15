@@ -52,6 +52,6 @@ func main() {
 	endpoints = make(map[string]*Endpoint)
 	http.HandleFunc("/", Handler)
 	port := ":" + os.Getenv("PORT")
-	log.Println("Duplex Hub started on", port, "...")
+	log.Println("Duplex Gateway started on", port, "...")
 	log.Fatal(http.ListenAndServe(port, nil))
 }

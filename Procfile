@@ -1,1 +1,1 @@
-web: hub
+web: gateway
