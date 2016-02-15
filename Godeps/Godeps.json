@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/progrium/duplex-hub",
+	"ImportPath": "github.com/progrium/duplex-gateway",
 	"GoVersion": "go1.5",
 	"Packages": [
 		"./..."
